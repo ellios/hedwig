@@ -531,4 +531,17 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>lesports-Release</id>
+            <name>Lesports Release Repository</name>
+            <url>http://dev.rd.lesports.com/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>lesports-Snapshots</id>
+            <name>Lesports Snapshots Repository</name>
+            <url>http://dev.rd.lesports.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
