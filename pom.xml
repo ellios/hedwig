@@ -40,6 +40,7 @@
         <module>hedwig-benchmark</module>
         <module>hedwig-http</module>
         <module>hedwig-memcached</module>
+        <module>hedwig-redis-client</module>
     </modules>
 
     <properties>
@@ -74,8 +75,7 @@
 
         <zookeeper.version>3.4.6</zookeeper.version>
         <curator.version>2.4.0</curator.version>
-        <commons.lang.version>2.4</commons.lang.version>
-
+        <jedis.version>ha-2.7.2-SNAPSHOT</jedis.version>
 
     </properties>
 
@@ -533,12 +533,12 @@
 
     <distributionManagement>
         <repository>
-            <id>lesports-Release</id>
+            <id>lesports-release</id>
             <name>Lesports Release Repository</name>
             <url>http://dev.rd.lesports.com/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
-            <id>lesports-Snapshots</id>
+            <id>lesports-snapshot</id>
             <name>Lesports Snapshots Repository</name>
             <url>http://dev.rd.lesports.com/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>

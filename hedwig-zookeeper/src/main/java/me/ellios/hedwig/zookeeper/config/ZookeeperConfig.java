@@ -40,7 +40,7 @@ public class ZookeeperConfig {
      */
     public static String getConnectString() {
         return hc.getString("hedwig.zk.ips",//
-                "10.11.50.124:2181,10.11.50.73:2181,10.11.50.34:2181,10.10.131.206:2181,10.20.120.139:2181");
+                "10.154.157.44:2181");
     }
 
     private static String type = DEFAULT_TYPE;
