@@ -291,66 +291,6 @@ public class ZookeeperClientTest {
         }
     }
 
-    @Test
-    public void aclSetTest() {
-        try {
-            System.setProperty("hedwig.zk.acl.user", "ugc_ugc");
-            System.setProperty("hedwig.zk.acl.password", "0lsI5C45DWYFy258");
-            ZookeeperClientFactory.clear();
-            ZookeeperClient client = ZookeeperClientFactory.getZookeeperClient();
-            List<String> digests = Arrays.asList(
-                    "vrs_mixer:4PCPXeCXbsl3fOB8",
-                    "lego_ugc:zardp3CmyRDPk5vM",
-                    "openapi_ugc:MEr48nSyiu1MTr8o",
-                    "up_down_ugc:A5qLwFqz3v9h49",
-                    "sns_ugc:5FP6HgEgt6fh2CDR",
-                    "vis-apis:fV8YabNQeV1xZgNF",
-                    "vis_intranet:2UA2XG0fSzfZsEiz",
-                    "vis_external_cooperation:XIFb1e9rY7MDmz4k",
-                    "top_recommend:X6pjZGKlzSgygV1c",
-                    "vrs_h5:n1mK59X9IBujBs9A"
-            );
-            List<ACL> acls = new ArrayList<ACL>();
-            for (String digest : digests) {
-                Id id = new Id("digest", DigestAuthenticationProvider.generateDigest(digest));
-                ACL acl = new ACL(ZooDefs.Perms.READ, id);
-                acls.add(acl);
-            }
-
-            // root acl
-            Id rootId = new Id("digest", DigestAuthenticationProvider.generateDigest("ugc_ugc:0lsI5C45DWYFy258"));
-            ACL rootAcl = new ACL(ZooDefs.Perms.ALL, rootId);
-            acls.add(rootAcl);
-
-            //client.withACL("/hedwig/prod/service/intra/T_TUgcVideoService", acls);
-            //client.withACL("/hedwig/test/service/continuous/T_TUgcVideoService", acls);
-            client.withACL("/T_TUgcVideoService", acls);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test(enabled = false)
-    public void aclCleanTest() {
-        try {
-            System.setProperty("hedwig.zk.acl.user", "ugc");
-            System.setProperty("hedwig.zk.acl.password", "uTRYk8Nv0Y9Zcq94");
-            ZookeeperClientFactory.clear();
-            ZookeeperClient client = ZookeeperClientFactory.getZookeeperClient();
-
-            List<ACL> acls = new ArrayList<ACL>();
-            // root acl
-            Id rootId = new Id("world", "anyone");
-            ACL rootAcl = new ACL(ZooDefs.Perms.ALL, rootId);
-            acls.add(rootAcl);
-
-            //client.withACL("/hedwig/prod/service/intra/T_TUgcVideoService", acls);
-            client.withACL("/hedwig/test/service/continuous/T_TUgcVideoService", acls);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void clearAuthInfo() {
         System.setProperty("hedwig.zk.acl.user", "");
         System.setProperty("hedwig.zk.acl.password", "");
