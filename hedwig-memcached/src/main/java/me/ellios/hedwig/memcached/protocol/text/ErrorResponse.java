@@ -10,7 +10,7 @@ import static me.ellios.hedwig.memcached.protocol.text.Protocol.*;
 /**
  * Common error response.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-26 14:12
  */
 public class ErrorResponse extends GenericResponse {

@@ -13,7 +13,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Say something please.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  */
 public class MultiplexHelperTest {
     private static final Logger LOG = LoggerFactory.getLogger(MultiplexHelperTest.class);

@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * In order to share the single on application context, we use this singleton.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-10 12
  */
 public class SingletonApplicationContext {

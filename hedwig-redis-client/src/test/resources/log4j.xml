@@ -11,11 +11,11 @@
         </layout>
     </appender>
 
-    <logger name="com.qiyi.vrs.vis.redis">
+    <logger name="me.ellios.vis.redis">
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="com.qiyi.vrs">
+    <logger name="me.ellios">
         <level value="ERROR" />
     </logger>
 

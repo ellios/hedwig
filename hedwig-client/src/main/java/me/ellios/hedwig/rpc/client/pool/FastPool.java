@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Implements for fast pooling.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 13-11-20
  */
 public class FastPool<T> implements ObjectPool<T> {

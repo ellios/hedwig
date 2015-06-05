@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * processor factory.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-24
  */
 public interface ProcessorFactory {

@@ -14,7 +14,7 @@ import org.jboss.netty.util.HashedWheelTimer;
 /**
  * A thrift server channel pipeline factory.
  *
- * @author George Cao(caozhangzhi@iqiyi.com)
+ * @author George Cao
  * @since 13-10-11 下午3:46
  */
 public class ThriftServerPipelineFactory implements ChannelPipelineFactory {

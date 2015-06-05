@@ -17,7 +17,7 @@ import java.util.concurrent.FutureTask;
 /**
  * Create unique object.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-04 10
  */
 public class ResourceCreator<K, R> {

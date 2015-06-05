@@ -19,7 +19,7 @@ import static org.testng.Assert.*;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-27 10
  */
 public class ThriftSocketTest {

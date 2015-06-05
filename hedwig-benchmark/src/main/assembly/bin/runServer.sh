@@ -15,4 +15,4 @@ LOG="/data/vrslogs/hedwig/benchmark_server_std.log"
 
 PHOME=$(dirname `readlink -f "$0"`)
 PHOME=$(dirname ${PHOME})
-java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* com.qiyi.vrs.hedwig.benchmark.BenchmarkServer 1> ${LOG} 2>&1 &
+java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* me.ellios.hedwig.benchmark.BenchmarkServer 1> ${LOG} 2>&1 &

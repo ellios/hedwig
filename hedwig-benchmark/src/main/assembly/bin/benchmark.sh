@@ -20,9 +20,9 @@ OIO_LOG="/data/vrslogs/hedwig/benchmark_client_oio.log"
 PB_LOG="/data/vrslogs/hedwig/benchmark_client_pb.log"
 
 if [ "${type}" == "thrift" ]; then
-    java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* -Dlog.path=${THRIFT_LOG} com.qiyi.vrs.hedwig.benchmark.thrift.client.ThriftBenchmarkClient 1> ${THRIFT_LOG} 2>&1 &
+    java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* -Dlog.path=${THRIFT_LOG} me.ellios.hedwig.benchmark.thrift.client.ThriftBenchmarkClient 1> ${THRIFT_LOG} 2>&1 &
 elif [ "${type}" == "oio" ]; then
-    java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* -Dlog.path=${OIO_LOG} com.qiyi.vrs.hedwig.benchmark.thrift.client.OioThriftBenchmarkClient $2 1> ${OIO_LOG} 2>&1 &
+    java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* -Dlog.path=${OIO_LOG} me.ellios.hedwig.benchmark.thrift.client.OioThriftBenchmarkClient $2 1> ${OIO_LOG} 2>&1 &
 else
-    java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* -Dlog.path=${PB_LOG} com.qiyi.vrs.hedwig.benchmark.pb.client.PbBenchmarkClient 1> ${PB_LOG} 2>&1 &
+    java ${JAVA_OPTS} -cp ${PHOME}/conf:${PHOME}/lib/* -Dlog.path=${PB_LOG} me.ellios.hedwig.benchmark.pb.client.PbBenchmarkClient 1> ${PB_LOG} 2>&1 &
 fi

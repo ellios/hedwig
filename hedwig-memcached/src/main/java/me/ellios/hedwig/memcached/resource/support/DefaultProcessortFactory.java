@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * default processor factory.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-24
  */
 public class DefaultProcessortFactory implements ProcessorFactory {

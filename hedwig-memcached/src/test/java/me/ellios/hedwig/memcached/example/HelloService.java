@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 /**
  * hello service
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-17
  */
 @Path("/")

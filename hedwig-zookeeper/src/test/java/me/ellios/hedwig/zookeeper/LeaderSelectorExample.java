@@ -49,11 +49,11 @@ public class LeaderSelectorExample
 
             for ( ExampleClient exampleClient : examples )
             {
-                Closeables.closeQuietly(exampleClient);
+                exampleClient.close();
             }
             for ( CuratorFramework client : clients )
             {
-                Closeables.closeQuietly(client);
+                client.close();
             }
         }
     }
@@ -77,8 +77,8 @@ public class LeaderSelectorExample
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } finally {
-            Closeables.closeQuietly(client);
-            Closeables.closeQuietly(leaderSelector);
+            client.close();
+            leaderSelector.close();
         }
     }
 }

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Default text protocol impl.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since 14-3-20
  */
 public class DefaultTextProtocol implements Protocol {

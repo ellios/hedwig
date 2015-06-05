@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A {@link org.apache.thrift.TProcessor} implementation let us know the message detail.
  *
- * @author George Cao(caozhangzhi@iqiyi.com)
+ * @author George Cao
  * @since 13-10-11 下午3:46
  */
 public class TTraceableProcessor implements TProcessor {
@@ -44,7 +44,7 @@ public class TTraceableProcessor implements TProcessor {
 
     @Override
     public boolean process(TProtocol in, TProtocol out) throws TException {
-        Stopwatch watch = new Stopwatch().start();
+        Stopwatch watch = Stopwatch.createStarted();
         TMessageWrapper wrapper = multiplex(in.readMessageBegin());
         TMessage message = wrapper.getMessage();
         boolean result = concreteProcessor.process(new TMessageProtocol(in, message), out);

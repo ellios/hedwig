@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
  * more detail: https://github.com/memcached/memcached/blob/master/doc/protocol.txt
  * <p/>
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since 14-3-20
  */
 public interface Protocol {

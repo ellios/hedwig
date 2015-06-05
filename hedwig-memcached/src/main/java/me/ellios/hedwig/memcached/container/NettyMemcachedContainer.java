@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-26 16:04
  */
 public class NettyMemcachedContainer {

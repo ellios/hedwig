@@ -11,7 +11,7 @@ import org.jboss.netty.util.HashedWheelTimer;
 /**
  * MemcachedServerPipelineFactory
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-14
  */
 public class MemcachedServerPipelineFactory implements ChannelPipelineFactory {

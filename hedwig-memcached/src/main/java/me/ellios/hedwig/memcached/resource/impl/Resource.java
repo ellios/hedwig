@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * resource defined.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-24
  */
 public class Resource implements Processor {

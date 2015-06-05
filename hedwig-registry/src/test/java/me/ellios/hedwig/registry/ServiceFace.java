@@ -3,7 +3,7 @@ package me.ellios.hedwig.registry;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@iqiyi.com)
+ * @author George Cao
  * @since 5/21/13 10:49 AM
  */
 public interface ServiceFace {

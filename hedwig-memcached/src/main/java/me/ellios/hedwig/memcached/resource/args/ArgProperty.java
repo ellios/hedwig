@@ -3,7 +3,7 @@ package me.ellios.hedwig.memcached.resource.args;
 /**
  * arg property.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-18
  */
 public class ArgProperty {

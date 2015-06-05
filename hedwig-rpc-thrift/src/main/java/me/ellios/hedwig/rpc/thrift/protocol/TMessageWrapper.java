@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * TMessage header and message body.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-13 17
  */
 public class TMessageWrapper {

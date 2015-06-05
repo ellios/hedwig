@@ -6,7 +6,7 @@ import org.apache.thrift.protocol.TMultiplexedProtocol;
 /**
  * Multiplex service helper.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  */
 public class MultiplexHelper {
 

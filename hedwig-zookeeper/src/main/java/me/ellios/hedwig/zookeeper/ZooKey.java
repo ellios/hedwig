@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * A zookeeper client key.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2013-12-26 16
  */
 public class ZooKey implements Serializable {

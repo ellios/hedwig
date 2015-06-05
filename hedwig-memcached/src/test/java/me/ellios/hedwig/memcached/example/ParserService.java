@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 /**
  * parser service
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-17
  */
 @Path("/user")

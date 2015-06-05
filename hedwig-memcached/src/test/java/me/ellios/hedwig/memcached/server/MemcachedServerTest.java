@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * dispatcher test case.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-18
  */
 public class MemcachedServerTest {

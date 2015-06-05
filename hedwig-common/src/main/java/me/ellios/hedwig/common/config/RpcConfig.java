@@ -3,7 +3,7 @@ package me.ellios.hedwig.common.config;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@iqiyi.com)
+ * @author George Cao
  * @since 13-10-11 上午10:53
  */
 public interface RpcConfig {

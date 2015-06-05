@@ -2,8 +2,8 @@
 //
 //import com.google.common.base.Function;
 //import com.google.common.collect.Lists;
-//import com.qiyi.vrs.hedwig.http.service.TRestService;
-//import com.qiyi.vrs.hedwig.http.service.model.TPayload;
+//import me.ellios.hedwig.http.service.TRestService;
+//import me.ellios.hedwig.http.service.model.TPayload;
 //import me.ellios.hedwig.http.mediatype.ExtendedMediaType;
 //import me.ellios.hedwig.http.provider.thrift.ThriftEntityProvider;
 //import me.ellios.hedwig.http.provider.thrift.ThriftListProvider;

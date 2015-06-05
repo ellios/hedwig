@@ -11,7 +11,7 @@ import static me.ellios.hedwig.memcached.protocol.text.Protocol.*;
  * The Get Command response.
  * See https://github.com/memcached/memcached/blob/master/doc/protocol.txt for detail.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-26 12:28
  */
 public class GetResponse extends GenericResponse implements Serializable {

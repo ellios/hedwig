@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-24 18:36
  */
 public abstract class JerseyResponseWriter<T> implements ContainerResponseWriter {

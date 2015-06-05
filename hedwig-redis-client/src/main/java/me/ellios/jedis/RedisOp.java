@@ -174,4 +174,10 @@ public interface RedisOp {
      * @return
      */
     Boolean exists(String key);
+
+    /**
+     * @param key
+     * @return
+     */
+    Long incr(String key);
 }

@@ -5,7 +5,7 @@ import me.ellios.hedwig.memcached.resource.args.parser.*;
 /**
  * args type.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-20
  */
 public enum ArgType {

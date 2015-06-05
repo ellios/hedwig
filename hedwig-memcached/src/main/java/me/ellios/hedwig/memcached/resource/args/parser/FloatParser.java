@@ -5,7 +5,7 @@ import me.ellios.hedwig.memcached.resource.args.ArgParser;
 /**
  * float parser.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-20
  */
 public class FloatParser implements ArgParser {

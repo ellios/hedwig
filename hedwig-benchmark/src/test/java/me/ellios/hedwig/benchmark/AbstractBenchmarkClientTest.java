@@ -1,4 +1,4 @@
-package com.qiyi.vrs.hedwig.benchmark;
+package me.ellios.hedwig.benchmark;
 
 import me.ellios.hedwig.benchmark.thrift.client.OioThriftBenchmarkClient;
 import org.junit.Test;

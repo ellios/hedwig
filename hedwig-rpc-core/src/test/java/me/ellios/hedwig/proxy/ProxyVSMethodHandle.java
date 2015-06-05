@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * jdk proxy vs jdk methodHandle
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 13-10-22
  */
 public class ProxyVSMethodHandle {
@@ -84,7 +84,7 @@ public class ProxyVSMethodHandle {
     @Test
     public void testProxyVSMethodHandle() throws Throwable {
         HelloService delegate = new HelloServiceImpl();
-        Stopwatch stopwatch = new Stopwatch();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         final int unit = 10000;
         int count = 100 * unit;
 
@@ -122,7 +122,7 @@ public class ProxyVSMethodHandle {
     @Test
     public void testProxyVSMethodHandleWithArgs() throws Throwable {
         HelloService delegate = new HelloServiceImpl();
-        Stopwatch stopwatch = new Stopwatch();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         final int unit = 10000;
         int count = 100 * unit;
         int result = 0;
@@ -159,7 +159,7 @@ public class ProxyVSMethodHandle {
     public void testInvoker() throws Throwable {
 
         HelloService delegate = new HelloServiceImpl();
-        Stopwatch stopwatch = new Stopwatch();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         int count = 1000000;
 
         MethodType type = MethodType.methodType(int.class, int.class, int.class);
@@ -212,7 +212,7 @@ public class ProxyVSMethodHandle {
     @Test
     public void testProxyVSMethodHandleWithArgsWithMap() throws Throwable {
         HelloService delegate = new HelloServiceImpl();
-        Stopwatch stopwatch = new Stopwatch();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         final int unit = 10000;
         int count = 100 * unit;
         int result = 0;

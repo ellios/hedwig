@@ -9,7 +9,7 @@ import java.security.Principal;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-24 18:54
  */
 public class JerseySecurityContext implements SecurityContext {

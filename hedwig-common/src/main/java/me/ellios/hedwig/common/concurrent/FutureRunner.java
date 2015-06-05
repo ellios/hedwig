@@ -14,7 +14,7 @@ import java.util.concurrent.FutureTask;
 /**
  * Given a Future, retrieve the data without exceptions.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-04 10
  */
 public class FutureRunner {

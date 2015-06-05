@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Netty HTTP Response Writer which bridges Jersey Response and Netty HTTP response.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-25 17:58
  */
 public class NettyHttpResponseWriter extends JerseyResponseWriter<HttpResponse> {

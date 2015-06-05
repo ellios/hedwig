@@ -103,7 +103,11 @@ public class ConnectionLimitFilterHandlerTest {
                         // ignored
                     } finally {
                         latch.countDown();
-                        Closeables.closeQuietly(socket);
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+
+                        }
                     }
                 }
             });
@@ -185,7 +189,7 @@ public class ConnectionLimitFilterHandlerTest {
         }
         for (Socket s : list) {
             LOG.info("{}", s.isClosed());
-            Closeables.closeQuietly(s);
+            s.close();
         }
         bootstrap.shutdown();
     }

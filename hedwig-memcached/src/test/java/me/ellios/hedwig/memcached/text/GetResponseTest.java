@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-26 19:04
  */
 public class GetResponseTest {

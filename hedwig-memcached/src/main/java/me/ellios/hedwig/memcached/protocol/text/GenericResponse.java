@@ -11,7 +11,7 @@ import java.io.OutputStream;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-26 21:30
  */
 public abstract class GenericResponse implements MemcachedResponse {

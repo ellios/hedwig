@@ -5,7 +5,7 @@ import me.ellios.hedwig.memcached.resource.args.ArgParser;
 /**
  * byte parser.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-20
  */
 public class ByteParser implements ArgParser {

@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * url rule object.
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-19
  */
 public class UriRule {

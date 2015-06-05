@@ -76,7 +76,7 @@ public class InterProcessMutexExample {
                 } catch (Exception ignored) {
 
                 }
-                Closeables.closeQuietly(client);
+                client.close();
             }
         }
     }

@@ -3,7 +3,7 @@ package me.ellios.hedwig.rpc.thrift.protocol;
 /**
  * Header name.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-13 16
  */
 public enum THeaderName {

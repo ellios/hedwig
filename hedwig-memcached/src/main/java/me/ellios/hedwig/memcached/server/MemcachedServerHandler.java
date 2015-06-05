@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * MemcachedServerHandler
  *
- * @author gaofeng@qiyi.com
+ * @author gaofeng
  * @since: 14-3-14
  */
 public class MemcachedServerHandler extends SimpleChannelUpstreamHandler {

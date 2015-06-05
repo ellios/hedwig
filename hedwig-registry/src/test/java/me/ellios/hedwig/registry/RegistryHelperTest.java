@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@iqiyi.com)
+ * @author George Cao
  * @since 5/21/13 10:18 AM
  */
 public class RegistryHelperTest {

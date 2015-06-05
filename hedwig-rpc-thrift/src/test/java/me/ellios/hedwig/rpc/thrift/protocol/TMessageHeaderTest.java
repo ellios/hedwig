@@ -14,7 +14,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Thrift message header Test.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-13 16
  */
 public class TMessageHeaderTest {

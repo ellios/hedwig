@@ -65,7 +65,7 @@ public class LockingExample
                     }
                     finally
                     {
-                        Closeables.closeQuietly(client);
+                        client.close();
                     }
                     return null;
                 }

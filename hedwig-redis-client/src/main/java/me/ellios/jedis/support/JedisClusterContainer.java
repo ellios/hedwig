@@ -1,5 +1,7 @@
 package me.ellios.jedis.support;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import me.ellios.jedis.OpType;
 import me.ellios.jedis.config.Config;
 import redis.clients.jedis.HostAndPort;
@@ -21,7 +23,7 @@ public class JedisClusterContainer extends AbstractJedisContainer {
     protected JedisClusterContainer(Config config) {
         super(config);
 
-        Set<HostAndPort> clusterNodes = Collections.emptySet();
+        Set<HostAndPort> clusterNodes = Sets.newHashSet();
 
         for (Config.RedisNode node : config.getNodes()) {
             clusterNodes.add(new HostAndPort(node.getHost(), node.getPort()));

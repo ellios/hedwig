@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-03-24 18:55
  */
 public class JerseyPropertiesDelegate implements PropertiesDelegate {

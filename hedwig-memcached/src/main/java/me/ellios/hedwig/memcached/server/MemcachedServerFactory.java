@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * A memcached server factory that is responsible for server creation.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-26 14
  */
 public class MemcachedServerFactory implements RpcServerFactory {

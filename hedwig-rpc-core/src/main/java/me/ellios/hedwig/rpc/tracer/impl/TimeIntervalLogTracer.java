@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Say something?
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2013-12-29 19
  */
 public class TimeIntervalLogTracer implements TracerDriver {

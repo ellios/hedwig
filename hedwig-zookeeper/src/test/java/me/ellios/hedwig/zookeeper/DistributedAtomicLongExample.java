@@ -66,7 +66,7 @@ public class DistributedAtomicLongExample {
         } catch (Exception ignored) {
 
         }finally {
-            Closeables.closeQuietly(client);
+            client.close();
         }
     }
 }

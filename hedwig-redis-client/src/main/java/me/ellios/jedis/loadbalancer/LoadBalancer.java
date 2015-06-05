@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * The Load Balancer interface for the special Resource {@link R}.
- * Use {@link com.qiyi.vrs.hedwig.rpc.loadbalancer.factory.LoadBalancerFactory#newLoadBalancer(java.util.List)} to
+ * Use {@link me.ellios.hedwig.rpc.loadbalancer.factory.LoadBalancerFactory#newLoadBalancer(java.util.List)} to
  * obtain a Load Balancer with the given resources.
  * Then call {@link #select()} to choose one resource to use.
  * After you created the load balancer, you can reset the resources by {@link #reset(java.util.List)}

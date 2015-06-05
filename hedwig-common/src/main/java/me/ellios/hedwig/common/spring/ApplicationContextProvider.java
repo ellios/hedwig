@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContextAware;
  * Get the spring application context in the current application.
  * This class need to be initialized in the spring configuration file.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @see me.ellios.hedwig.common.spring.SingletonApplicationContext
  * @since 2014-01-09 21
  */

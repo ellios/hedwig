@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * The server that speaks memcached binary protocol.
  *
- * @author George Cao(caozhangzhi@qiyi.com)
+ * @author George Cao
  * @since 2014-01-26 14
  */
 public class MemcachedServer extends AbstractRpcServer {
