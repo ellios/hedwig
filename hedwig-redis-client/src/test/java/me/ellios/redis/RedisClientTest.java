@@ -5,6 +5,7 @@ import me.ellios.jedis.RedisClientFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,5 +97,49 @@ public class RedisClientTest {
         Assert.assertTrue(result > 0);
         Assert.assertTrue(members.size() == 2);
         Assert.assertTrue(rem > 0);
+    }
+
+    @Test
+    public void testSetObject(){
+        User user = new User();
+        user.setId("zzzzzzz");
+        user.setName("gogogogo");
+        client.setObject("zzz", user, 1000);
+        System.out.println("======================================");
+        System.out.println(user);
+        System.out.println("======================================");
+    }
+
+    public static class User implements Serializable {
+
+
+
+        private String id;
+        private String name;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("User{");
+            sb.append("id='").append(id).append('\'');
+            sb.append(", name='").append(name).append('\'');
+            sb.append('}');
+            return sb.toString();
+        }
     }
 }

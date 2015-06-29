@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import me.ellios.jedis.config.Config;
 import me.ellios.jedis.config.ServerMode;
 import me.ellios.jedis.support.AbstractRedisClient;
+import me.ellios.jedis.transcoders.CachedData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -46,7 +47,25 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 }
             });
         }
+    }
 
+    @Override
+    public Object getObject(final String key) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Object>() {
+                @Override
+                public Object doWithJedisCluster(JedisCluster cluster) {
+                    return transcoder.decode(new CachedData(cluster.getBytes(key)));
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Object>() {
+                @Override
+                public Object doWithJedis(Jedis jedis) {
+                    return transcoder.decode(new CachedData(jedis.get(SafeEncoder.encode(key))));
+                }
+            });
+        }
     }
 
     @Override
@@ -216,6 +235,37 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                         status = jedis.setex(SafeEncoder.encode(key), exp, data);
                     } else {
                         status = jedis.set(SafeEncoder.encode(key), data);
+                    }
+                    return Protocol.Keyword.OK.name().equalsIgnoreCase(status);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Boolean setObject(final String key, final Object data, final int exp) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedisCluster(JedisCluster cluster) {
+                    String status = "";
+                    if (exp > 0) {
+                        status = cluster.setexBytes(key, exp, transcoder.encode(data).getFullData());
+                    } else {
+                        status = cluster.setBytes(key, transcoder.encode(data).getFullData());
+                    }
+                    return Protocol.Keyword.OK.name().equalsIgnoreCase(status);
+                }
+            });
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedis(Jedis jedis) {
+                    String status = "";
+                    if (exp > 0) {
+                        status = jedis.setex(SafeEncoder.encode(key), exp, transcoder.encode(data).getFullData());
+                    } else {
+                        status = jedis.set(SafeEncoder.encode(key), transcoder.encode(data).getFullData());
                     }
                     return Protocol.Keyword.OK.name().equalsIgnoreCase(status);
                 }

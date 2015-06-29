@@ -1,5 +1,7 @@
 package me.ellios.jedis;
 
+import redis.clients.jedis.Tuple;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,8 @@ import java.util.Set;
  * Date: 13-1-29 Time: 下午9:09
  */
 public interface RedisOp {
+
+    Object getObject(String key);
 
     /**
      * Get the value of the specified key
@@ -79,6 +83,8 @@ public interface RedisOp {
      * @return
      */
     Long sadd(String key, String... members);
+
+    Boolean setObject(String key, Object data, int exp);
 
     /**
      * Return all the members (elements) of the set value stored at key
@@ -180,4 +186,20 @@ public interface RedisOp {
      * @return
      */
     Long incr(String key);
+
+//    Boolean zadd(String key, double score, String member);
+//
+//    Long zadd(String key, Map<String, Double> scoreMembers);
+//
+//    Set<String> zrange(String key, long start, long end);
+//
+//    Set<String> zrangeByScore(String key, double min, double max);
+//
+//    Set<String> zrangeByScore(String key, double min, double max, int offset, int count);
+//
+//    Set<Tuple> zrangeByScoreWithScores(String key, double min, double max, int offset, int count);
+//
+//    Long zcard(String key);
+//
+//    Long zrem(String key, String... member);
 }

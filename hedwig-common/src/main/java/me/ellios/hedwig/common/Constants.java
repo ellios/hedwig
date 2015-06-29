@@ -29,6 +29,8 @@ public interface Constants {
     String BACKSPACE = " ";
     String EMPTY_STRING = "";
     String COMMA = ",";
+    String EQUALITY = "=";
+    String AMPERSAND = "&";
     String PATH_SEPARATOR = "/";
     String ZNODE_NAME_SEPARATOR = ":";
     String ZNODE_PATH_PREFIX = "/service";

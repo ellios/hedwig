@@ -6,6 +6,8 @@ import me.ellios.jedis.JedisClusterCallback;
 import me.ellios.jedis.OpType;
 import me.ellios.jedis.config.Config;
 import me.ellios.jedis.config.ServerMode;
+import me.ellios.jedis.transcoders.SerializingTranscoder;
+import me.ellios.jedis.transcoders.Transcoder;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
@@ -23,6 +25,8 @@ import redis.clients.util.Pool;
 abstract public class AbstractRedisClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractRedisClient.class);
+
+    protected Transcoder transcoder = new SerializingTranscoder();
 
     //redis数据库信息
     private volatile Config config = null;

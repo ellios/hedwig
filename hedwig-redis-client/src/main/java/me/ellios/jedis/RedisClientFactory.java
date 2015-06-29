@@ -32,11 +32,11 @@ public class RedisClientFactory {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(name));
 
         //use futuretask to reduce redundancy create big object
-        FutureTask<me.ellios.jedis.RedisClient> future = clients.get(name);
+        FutureTask<RedisClient> future = clients.get(name);
         if (null != future) {
             return runFuture(future);
         } else {
-            FutureTask<me.ellios.jedis.RedisClient> task = new FutureTask<>(new Callable<me.ellios.jedis.RedisClient>() {
+            FutureTask<RedisClient> task = new FutureTask<>(new Callable<me.ellios.jedis.RedisClient>() {
                 @Override
                 public me.ellios.jedis.RedisClient call() throws Exception {
                     return createRedisClient(name);

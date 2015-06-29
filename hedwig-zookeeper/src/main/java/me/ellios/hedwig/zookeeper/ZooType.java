@@ -8,6 +8,7 @@ package me.ellios.hedwig.zookeeper;
  */
 public enum ZooType {
     REDIS("redis"),
+    MEMCACHED("memcached"),
     JMS("jms"),
     RECIPES("recipes"),
     SERVICE("service"),
