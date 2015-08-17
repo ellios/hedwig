@@ -120,6 +120,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
             return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
                 @Override
                 public Boolean doWithJedis(Jedis jedis) {
+                    LOG.info("begin to delete key : {} from : {}:{}", key, jedis.getClient().getHost(), jedis.getClient().getPort());
                     return jedis.del(SafeEncoder.encode(key)) >= 0;
                 }
             });
@@ -446,7 +447,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 }
             });
         } else {
-            return executeWithJedis(READ, new JedisCallback<Long>() {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
                 @Override
                 public Long doWithJedis(Jedis jedis) {
                     return jedis.incr(key);

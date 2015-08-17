@@ -39,6 +39,7 @@
         <module>hedwig-http</module>
         <module>hedwig-memcached</module>
         <module>hedwig-redis-client</module>
+        <module>hedwig-memcached-client</module>
     </modules>
 
     <properties>

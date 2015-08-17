@@ -17,6 +17,8 @@ import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.util.Pool;
 
+import java.net.SocketException;
+
 /**
  * 和云平台整合的redis客户端
  * Author: ellios
@@ -103,20 +105,37 @@ abstract public class AbstractRedisClient {
     public <T> T executeWithJedis(OpType type, JedisCallback<T> callback) {
         boolean broken = false;
         Jedis jedis = null;
-        try {
-            jedis = getJedis(type);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("execute from redis {}:{}", jedis.getClient().getHost(),
-                        jedis.getClient().getPort());
+        int tryCount = 1;
+        while (tryCount <= 3){
+            //乐视的redis太不靠谱，这里增加了重试机制
+            try {
+                jedis = getJedis(type);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("execute from redis {}:{}", jedis.getClient().getHost(),
+                            jedis.getClient().getPort());
+                }
+                return callback.doWithJedis(jedis);
+            } catch (JedisConnectionException e) {
+                //Redis Connection is broken
+                broken = true;
+                if(tryCount < 3){
+                    LOG.warn("fail to execute callback in redis host : {} port : {}, error : {}, try again tryCount : {}",
+                            jedisLocal.get().getKey().getClient().getHost(),
+                            jedisLocal.get().getKey().getClient().getPort(),
+                            e.getMessage(), tryCount);
+                }else{
+                    LOG.warn("wooooo fail to execute callback in redis host : {} port : {}, error : {} after tryCount : {}",
+                            jedisLocal.get().getKey().getClient().getHost(),
+                            jedisLocal.get().getKey().getClient().getPort(),
+                            e.getMessage(), tryCount, e);
+                }
+
+            } finally {
+                cleanContext(broken);
+                tryCount++;
             }
-            return callback.doWithJedis(jedis);
-        } catch (JedisConnectionException e) {
-            //Redis Connection is broken
-            broken = true;
-            LOG.error("fail to execute callback in redis:{}, error : {}", jedisLocal.get(), e.getMessage(), e);
-        } finally {
-            cleanContext(broken);
         }
+
         return null;
     }
 

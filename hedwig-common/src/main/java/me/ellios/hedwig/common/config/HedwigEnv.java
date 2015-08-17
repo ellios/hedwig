@@ -1,6 +1,8 @@
 package me.ellios.hedwig.common.config;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 运行环境
@@ -10,8 +12,11 @@ import org.apache.commons.lang3.StringUtils;
 public enum HedwigEnv {
 
     PRODUCTION("prod"),
+
     TEST("test"),
+    STAGING("staging"),
     DEVELOPMENT("dev");
+    private static final Logger LOG = LoggerFactory.getLogger(HedwigEnv.class);
 
     private String abbreviation;
 
@@ -38,6 +43,7 @@ public enum HedwigEnv {
                 return env;
             }
         }
+        LOG.warn("fail to getEnvByAbbreviation for : {}. retrun defalult env : dev", abbreviation);
         return DEVELOPMENT;
     }
 }

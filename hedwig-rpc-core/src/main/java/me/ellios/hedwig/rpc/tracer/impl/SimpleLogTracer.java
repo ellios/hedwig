@@ -31,7 +31,7 @@ public class SimpleLogTracer implements TracerDriver {
 
     @Override
     public void addGauge(String name, Object value) {
-        LOG.info("Stat: {}, value: {}", name, value);
+        LOG.debug("Stat: {}, value: {}", name, value);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class SimpleLogTracer implements TracerDriver {
             COUNTER_MAP.putIfAbsent(name, new AtomicLong(0));
         }
         long value = COUNTER_MAP.get(name).addAndGet(increment);
-        LOG.info("Counter: {}, delta: {}, total: {}", name, increment, value);
+        LOG.debug("Counter: {}, delta: {}, total: {}", name, increment, value);
     }
 }

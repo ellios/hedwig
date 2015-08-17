@@ -26,6 +26,7 @@ public class Config {
     private ServerMode serverMode;
     private List<RedisNode> nodes = Lists.newArrayList();
     private String sentinelName;
+    private String password;
     private int db = 0;
 
     public String getSentinelName() {
@@ -72,6 +73,21 @@ public class Config {
         this.nodes.add(node);
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getDb() {
+        return db;
+    }
+
+    public void setDb(int db) {
+        this.db = db;
+    }
 
     @Override
     public String toString() {
@@ -120,6 +136,8 @@ public class Config {
         if(serverMode == ServerMode.SENTINEL){
             config.setSentinelName(MapUtils.getString(params, "sentinel", name));
         }
+        config.setPassword(MapUtils.getString(params, "password"));
+        config.setDb(MapUtils.getIntValue(params, "db", 0));
 
         String servers = uri.getAuthority();
         int index = 0;
@@ -128,6 +146,7 @@ public class Config {
             if(serverMode == ServerMode.MASTER_SLAVE && index == 0){
                 node.setMaster(true);
             }
+            index++;
             config.addNode(node);
         }
 

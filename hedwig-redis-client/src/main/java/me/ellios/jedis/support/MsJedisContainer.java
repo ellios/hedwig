@@ -126,7 +126,7 @@ public class MsJedisContainer extends AbstractJedisContainer{
         if (pool == null) {
             int timeout = RedisConfigFileParsers.getTimeout();
             GenericObjectPoolConfig poolConfig = getPoolConfig();
-            pool = new JedisPool(poolConfig, node.getHost(), node.getPort(), timeout);
+            pool = new JedisPool(poolConfig, node.getHost(), node.getPort(), timeout, config.getPassword(), config.getDb());
             this.nodeJedisPoolMap.put(node, pool);
         }
         return this.nodeJedisPoolMap.get(node);

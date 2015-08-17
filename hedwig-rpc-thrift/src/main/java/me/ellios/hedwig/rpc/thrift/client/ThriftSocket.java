@@ -23,7 +23,7 @@ import java.net.SocketException;
  */
 public class ThriftSocket extends TIOStreamTransport implements Closeable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TSocket.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(ThriftSocket.class.getName());
     /**
      * Wrapped Socket object.
      */
@@ -130,7 +130,7 @@ public class ThriftSocket extends TIOStreamTransport implements Closeable {
         }
         try {
             socket.connect(address, getConnectTimeoutInMillis());
-            LOG.info("You just opened a connection {} with configuration {}", socket, config);
+            LOG.debug("You just opened a connection {} with configuration {}", socket, config);
             inputStream_ = new BufferedInputStream(socket.getInputStream(), config.receiveBufferSize());
             outputStream_ = new BufferedOutputStream(socket.getOutputStream(), config.sendBufferSize());
         } catch (IOException iox) {
@@ -150,7 +150,7 @@ public class ThriftSocket extends TIOStreamTransport implements Closeable {
         if (socket != null) {
             try {
                 socket.close();
-                LOG.info("You just closed an open connection {}", socket);
+                LOG.debug("You just closed an open connection {}", socket);
             } catch (IOException iox) {
                 LOG.warn("Could not close socket {}.", socket, iox);
             }

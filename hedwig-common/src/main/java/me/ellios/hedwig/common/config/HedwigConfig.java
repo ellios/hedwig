@@ -95,6 +95,7 @@ public class HedwigConfig implements RpcConfig {
         }
         Properties properties = new Properties();
         URL url = getClass().getResource(resourceName);
+        LOG.info("load properties from : {}", url);
         if (null == url) {
             return properties;
         }

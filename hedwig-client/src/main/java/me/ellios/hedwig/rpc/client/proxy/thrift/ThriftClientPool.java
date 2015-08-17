@@ -103,7 +103,7 @@ public class ThriftClientPool<T extends TServiceClient> extends Pool<T> implemen
         public void destroyObject(final T client) throws Exception {
             TTransport transport = transports.get(client);
             if (transport != null && transport.isOpen()) {
-                LOG.info("Closing transport. client : {}, transport : {}, serviceNode :{}",
+                LOG.debug("Closing transport. client : {}, transport : {}, serviceNode :{}",
                         client, transport, serviceNode.getZnodeName());
                 transport.close();
             }

@@ -49,14 +49,14 @@ public class SampleLogTracer implements TracerDriver {
     public void addTrace(String name, long time, TimeUnit unit) {
         addCount(name, 1);
         if (should()) {
-            logger.info("Trace: {}, time: {}, unit: {}", name, time, unit);
+            logger.debug("Trace: {}, time: {}, unit: {}", name, time, unit);
         }
     }
 
     @Override
     public void addGauge(String name, Object value) {
         if (should()) {
-            logger.info("Stat: {}, value: {}", name, value);
+            logger.debug("Stat: {}, value: {}", name, value);
         }
     }
 
@@ -67,7 +67,7 @@ public class SampleLogTracer implements TracerDriver {
         }
         long value = COUNTER_MAP.get(name).addAndGet(increment);
         if (should()) {
-            logger.info("Counter: {}, delta: {}, total: {}", name, increment, value);
+            logger.debug("Counter: {}, delta: {}, total: {}", name, increment, value);
         }
     }
 }

@@ -1,6 +1,5 @@
 package me.ellios.memcached;
 
-import me.ellios.hedwig.common.exceptions.HedwigException;
 import me.ellios.memcached.config.Config;
 import me.ellios.memcached.exception.HedwigMemcachedException;
 import me.ellios.memcached.support.AbstractMemcachedClient;
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeoutException;
  * User: ellios
  * Time: 15-6-28 : 下午11:31
  */
-public class HedwigMemcachedClient extends AbstractMemcachedClient{
+public class HedwigMemcachedClient extends AbstractMemcachedClient {
 
     private long timeout = 1000L;
 
@@ -86,7 +85,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public long decr(String key, long delta, long initValue, long timeout, int exp) {
         try {
             return getMemcachedClient().decr(key, delta, initValue, timeout, exp);
-        } catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -106,7 +105,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public boolean delete(String key, long opTimeout) {
         try {
             return getMemcachedClient().delete(key, opTimeout);
-        } catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -115,7 +114,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void decrWithNoReply(String key, long delta) {
         try {
             getMemcachedClient().decrWithNoReply(key, delta);
-        } catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -124,7 +123,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void deleteWithNoReply(String key) {
         try {
             getMemcachedClient().deleteWithNoReply(key);
-        }  catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -133,7 +132,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public <T> Map<String, T> get(Collection<String> keyCollections, long timeout) {
         try {
             return getMemcachedClient().get(keyCollections, timeout);
-        } catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -143,7 +142,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public <T> T get(String key, long timeout) {
         try {
             return (T) getMemcachedClient().get(key, timeout);
-        }  catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -152,7 +151,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public long incr(String key, long delta, long initValue, long timeout, int exp) {
         try {
             return getMemcachedClient().incr(key, delta, initValue, timeout, exp);
-        }  catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -161,7 +160,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void incrWithNoReply(String key, long delta) {
         try {
             getMemcachedClient().incrWithNoReply(key, delta);
-        }  catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -170,7 +169,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public boolean set(String key, int exp, Object value, long timeout) {
         try {
             return getMemcachedClient().set(key, exp, value, timeout);
-        }  catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -184,7 +183,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public boolean add(String key, int exp, Object value, long timeout) {
         try {
             return getMemcachedClient().add(key, exp, value, timeout);
-        }  catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -193,7 +192,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void addWithNoReply(String key, int exp, Object value) {
         try {
             getMemcachedClient().addWithNoReply(key, exp, value);
-        }  catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -207,7 +206,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public boolean append(String key, Object value, long timeout) {
         try {
             return getMemcachedClient().append(key, value, timeout);
-        }  catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -216,7 +215,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void appendWithNoReply(String key, Object value) {
         try {
             getMemcachedClient().appendWithNoReply(key, value);
-        }  catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -230,7 +229,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public boolean cas(String key, int exp, Object value, long timeout, long cas) {
         try {
             return getMemcachedClient().cas(key, exp, value, timeout, cas);
-        } catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -253,7 +252,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void prependWithNoReply(String key, Object value) {
         try {
             getMemcachedClient().prependWithNoReply(key, value);
-        } catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -267,7 +266,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public boolean replace(String key, int exp, Object value, long timeout) {
         try {
             return getMemcachedClient().replace(key, exp, value, timeout);
-        } catch (TimeoutException|InterruptedException|MemcachedException e) {
+        } catch (TimeoutException | InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -276,7 +275,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void replaceWithNoReply(String key, int exp, Object value) {
         try {
             getMemcachedClient().replaceWithNoReply(key, exp, value);
-        } catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
@@ -285,7 +284,7 @@ public class HedwigMemcachedClient extends AbstractMemcachedClient{
     public void setWithNoReply(String key, int exp, Object value) {
         try {
             getMemcachedClient().setWithNoReply(key, exp, value);
-        } catch (InterruptedException|MemcachedException e) {
+        } catch (InterruptedException | MemcachedException e) {
             throw new HedwigMemcachedException(e);
         }
     }
