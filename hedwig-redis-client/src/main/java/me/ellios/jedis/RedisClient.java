@@ -62,7 +62,11 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
             return executeWithJedis(READ, new JedisCallback<Object>() {
                 @Override
                 public Object doWithJedis(Jedis jedis) {
-                    return transcoder.decode(new CachedData(jedis.get(SafeEncoder.encode(key))));
+                    byte[] data = jedis.get(SafeEncoder.encode(key));
+                    if(data == null || data.length <= 0){
+                        return null;
+                    }
+                    return transcoder.decode(new CachedData(data));
                 }
             });
         }
