@@ -4,6 +4,7 @@ import me.ellios.jedis.RedisClient;
 import me.ellios.jedis.RedisClientFactory;
 import org.junit.Assert;
 import org.junit.Test;
+import redis.clients.jedis.Tuple;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -97,6 +98,23 @@ public class RedisClientTest {
         Assert.assertTrue(result > 0);
         Assert.assertTrue(members.size() == 2);
         Assert.assertTrue(rem > 0);
+    }
+
+    @Test
+    public void zsetTest(){
+//        for(int i=0; i<10; i++){
+//            int value = 123+i;
+//            client.zadd("ellios_zset", value, String.valueOf(value));
+//        }
+        System.out.println(client.zcard("ellios_zset"));
+        System.out.println(client.zrange("ellios_zset", 5, 8));
+        System.out.println(client.zrangeByScore("ellios_zset", 123, 128));
+        System.out.println(client.zrangeByScore("ellios_zset", 123, 128, 1, 10));
+        Set<Tuple> tts = client.zrangeByScoreWithScores("ellios_zset", 123, 128, 0, 2);
+        for(Tuple tt : tts){
+            System.out.println(tt.getElement());
+            System.out.println(tt.getScore());
+        }
     }
 
     @Test

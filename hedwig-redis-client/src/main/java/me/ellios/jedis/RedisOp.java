@@ -187,19 +187,19 @@ public interface RedisOp {
      */
     Long incr(String key);
 
-//    Boolean zadd(String key, double score, String member);
-//
-//    Long zadd(String key, Map<String, Double> scoreMembers);
-//
-//    Set<String> zrange(String key, long start, long end);
-//
-//    Set<String> zrangeByScore(String key, double min, double max);
-//
-//    Set<String> zrangeByScore(String key, double min, double max, int offset, int count);
-//
-//    Set<Tuple> zrangeByScoreWithScores(String key, double min, double max, int offset, int count);
-//
-//    Long zcard(String key);
-//
-//    Long zrem(String key, String... member);
+    Boolean zadd(String key, double score, String member);
+
+    Long zadd(String key, Map<String, Double> scoreMembers);
+
+    Set<String> zrange(String key, long start, long end);
+
+    Set<String> zrangeByScore(String key, double min, double max);
+
+    Set<String> zrangeByScore(String key, double min, double max, int offset, int count);
+
+    Set<Tuple> zrangeByScoreWithScores(String key, double min, double max, int offset, int count);
+
+    Long zcard(String key);
+
+    Long zrem(String key, String... members);
 }

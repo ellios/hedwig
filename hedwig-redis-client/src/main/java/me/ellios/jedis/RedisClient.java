@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.Protocol;
+import redis.clients.jedis.Tuple;
 import redis.clients.util.SafeEncoder;
 
 import java.util.*;
@@ -455,6 +456,159 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 @Override
                 public Long doWithJedis(Jedis jedis) {
                     return jedis.incr(key);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Boolean zadd(final String key, final double score, final String member) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zadd(key, score, member) > 0;
+                }
+            });
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedis(Jedis jedis) {
+                    return jedis.zadd(key, score, member) > 0;
+                }
+            });
+        }
+    }
+
+    @Override
+    public Long zadd(final String key, final Map<String, Double> scoreMembers) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Long>() {
+                @Override
+                public Long doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zadd(key, scoreMembers);
+                }
+            });
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
+                @Override
+                public Long doWithJedis(Jedis jedis) {
+                    return jedis.zadd(key, scoreMembers);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Set<String> zrange(final String key, final long start, final long end) {
+
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Set<String>>() {
+                @Override
+                public Set<String> doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zrange(key, start, end);
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Set<String>>() {
+                @Override
+                public Set<String> doWithJedis(Jedis jedis) {
+                    return jedis.zrange(key, start, end);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Set<String> zrangeByScore(final String key, final double min, final double max) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Set<String>>() {
+                @Override
+                public Set<String> doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zrangeByScore(key, min, max);
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Set<String>>() {
+                @Override
+                public Set<String> doWithJedis(Jedis jedis) {
+                    return jedis.zrangeByScore(key, min, max);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Set<String> zrangeByScore(final String key, final double min, final double max, final int offset, final int count) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Set<String>>() {
+                @Override
+                public Set<String> doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zrangeByScore(key, min, max, offset, count);
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Set<String>>() {
+                @Override
+                public Set<String> doWithJedis(Jedis jedis) {
+                    return jedis.zrangeByScore(key, min, max, offset, count);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Set<Tuple> zrangeByScoreWithScores(final String key, final double min, final double max, final int offset, final int count) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Set<Tuple>>() {
+                @Override
+                public Set<Tuple> doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zrangeByScoreWithScores(key, min, max, offset, count);
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Set<Tuple>>() {
+                @Override
+                public Set<Tuple> doWithJedis(Jedis jedis) {
+                    return jedis.zrangeByScoreWithScores(key, min, max, offset, count);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Long zcard(final String key) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Long>() {
+                @Override
+                public Long doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zcard(key);
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Long>() {
+                @Override
+                public Long doWithJedis(Jedis jedis) {
+                    return jedis.zcard(key);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Long zrem(final String key, final String... members) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Long>() {
+                @Override
+                public Long doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.zrem(key, members);
+                }
+            });
+        } else {
+            return executeWithJedis(READ, new JedisCallback<Long>() {
+                @Override
+                public Long doWithJedis(Jedis jedis) {
+                    return jedis.zrem(key, members);
                 }
             });
         }

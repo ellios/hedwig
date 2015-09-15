@@ -123,6 +123,10 @@ abstract public class AbstractRedisClient {
                             jedisLocal.get().getKey().getClient().getHost(),
                             jedisLocal.get().getKey().getClient().getPort(),
                             e.getMessage(), tryCount);
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e1) {
+                    }
                 }else{
                     LOG.warn("wooooo fail to execute callback in redis host : {} port : {}, error : {} after tryCount : {}",
                             jedisLocal.get().getKey().getClient().getHost(),
