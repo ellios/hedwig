@@ -132,6 +132,7 @@ abstract public class AbstractRedisClient {
                             jedisLocal.get().getKey().getClient().getHost(),
                             jedisLocal.get().getKey().getClient().getPort(),
                             e.getMessage(), tryCount, e);
+                    throw e;
                 }
 
             } finally {
@@ -192,16 +193,17 @@ abstract public class AbstractRedisClient {
             Pool<Jedis> pool = pair.getValue();
             if (pool != null) {
                 if (broken) {
-                    pool.returnBrokenResource(jedis);
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("return broken jedis : {} to pool : {}", jedis, pool);
-                    }
-                } else {
+                    jedis.close();
+                    LOG.info("return broken jedis host : {} port : {} to pool : {}",
+                            jedis.getClient().getHost(), jedis.getClient().getPort(), pool);
+                }else{
                     pool.returnResource(jedis);
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("return jedis : {} to pool : {}", jedis, pool);
+                        LOG.debug("return jedis host : {} port : {} to pool : {}",
+                                jedis.getClient().getHost(), jedis.getClient().getPort(), pool);
                     }
                 }
+
             }
         }
     }

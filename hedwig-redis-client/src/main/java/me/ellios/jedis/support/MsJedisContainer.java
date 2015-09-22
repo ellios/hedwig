@@ -201,7 +201,7 @@ public class MsJedisContainer extends AbstractJedisContainer{
 
         private void repairBrokenNode() {
             if (CollectionUtils.isNotEmpty(brokenNodes)) {
-                for (me.ellios.jedis.config.Config.RedisNode node : brokenNodes) {
+                for (Config.RedisNode node : brokenNodes) {
                     LOG.warn("being to validate broken node : {}", node);
                     Jedis jedis = new Jedis(node.getHost(), node.getPort());
                     try {
@@ -217,12 +217,12 @@ public class MsJedisContainer extends AbstractJedisContainer{
                         }
                     } catch (JedisConnectionException | JedisDataException e) {
                         node.incFail();
-                        LOG.warn("!!!!!!!!!!!!! redis node : {} still broken", node);
+                        LOG.warn("!!!!!!!!!!!!! redis node : {} still broken, error : {}", node, e.getMessage());
                     } catch (Exception e) {
                         LOG.error(e.getMessage(), e);
                     } finally {
                         if (jedis != null && jedis.isConnected()) {
-                            jedis.disconnect();
+                            jedis.close();
                         }
                     }
                 }

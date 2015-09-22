@@ -414,7 +414,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 }
             });
         } else {
-            return executeWithJedis(READ, new JedisCallback<Long>() {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
                 @Override
                 public Long doWithJedis(Jedis jedis) {
                     return jedis.lpush(key, members);
@@ -605,7 +605,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 }
             });
         } else {
-            return executeWithJedis(READ, new JedisCallback<Long>() {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
                 @Override
                 public Long doWithJedis(Jedis jedis) {
                     return jedis.zrem(key, members);
@@ -662,7 +662,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 }
             });
         } else {
-            return executeWithJedis(READ, new JedisCallback<Long>() {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
                 @Override
                 public Long doWithJedis(Jedis jedis) {
                     return jedis.expire(key, seconds);
@@ -685,7 +685,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 }
             });
         } else {
-            return executeWithJedis(READ, new JedisCallback<Boolean>() {
+            return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
                 @Override
                 public Boolean doWithJedis(Jedis jedis) {
                     Long status = jedis.setnx(key, data);

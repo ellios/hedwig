@@ -25,7 +25,7 @@ public class RedisConfigFileParsers {
     }
 
     public static int getPoolMaxActive() {
-        return HEDWIG_CONFIG.getInt("redis.pool.maxActive", 100);
+        return HEDWIG_CONFIG.getInt("redis.pool.maxActive", 200);
     }                       
 
     public static int getPoolMaxIdle() {
@@ -45,7 +45,7 @@ public class RedisConfigFileParsers {
     }
 
     public static boolean getPoolTestOnBorrow() {
-        return HEDWIG_CONFIG.getBoolean("redis.pool.testOnBorrow", false);
+        return HEDWIG_CONFIG.getBoolean("redis.pool.testOnBorrow", true);
     }
 
     public static boolean getPoolTestOnReturn() {
