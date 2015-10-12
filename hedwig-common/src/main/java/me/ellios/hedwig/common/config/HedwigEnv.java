@@ -15,7 +15,8 @@ public enum HedwigEnv {
 
     TEST("test"),
     STAGING("staging"),
-    DEVELOPMENT("dev");
+    DEVELOPMENT("dev"),
+    STAGING1("staging1");
     private static final Logger LOG = LoggerFactory.getLogger(HedwigEnv.class);
 
     private String abbreviation;

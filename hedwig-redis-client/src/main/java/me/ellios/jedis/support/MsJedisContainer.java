@@ -10,6 +10,7 @@ import me.ellios.jedis.config.Config;
 import me.ellios.jedis.util.RedisConfigFileParsers;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import redis.clients.jedis.exceptions.JedisDataException;
 import redis.clients.util.Pool;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.*;
 
@@ -205,6 +207,9 @@ public class MsJedisContainer extends AbstractJedisContainer{
                     LOG.warn("being to validate broken node : {}", node);
                     Jedis jedis = new Jedis(node.getHost(), node.getPort());
                     try {
+                        if(StringUtils.isNotEmpty(config.getPassword())){
+                            jedis.auth(config.getPassword());
+                        }
                         jedis.connect();
                         if (jedis.isConnected() && "PONG".equals(jedis.ping())) {
                             slaveJedisPools.add(buildJedisPool(node));
