@@ -119,6 +119,8 @@ public interface RedisOp {
      */
     Long lpush(String key, String members);
 
+    Map<String, String> lrange(String key);
+
     /**
      * expire time
      *
@@ -202,4 +204,6 @@ public interface RedisOp {
     Long zcard(String key);
 
     Long zrem(String key, String... members);
+
+    List<String> lrange(String key, long start, long end);
 }
