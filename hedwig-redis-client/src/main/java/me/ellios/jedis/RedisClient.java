@@ -672,7 +672,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
     }
 
     @Override
-    public Map<String, String> lrange(final String key) {
+    public Map<String, String> hgetAll(final String key) {
         if (getServerMode() == ServerMode.CLUSTER) {
             return executeWithJedisCluster(new JedisClusterCallback<Map<String, String>>() {
                 @Override

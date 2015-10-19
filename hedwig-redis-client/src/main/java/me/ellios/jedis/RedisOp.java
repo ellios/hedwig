@@ -119,7 +119,7 @@ public interface RedisOp {
      */
     Long lpush(String key, String members);
 
-    Map<String, String> lrange(String key);
+    Map<String, String> hgetAll(String key);
 
     /**
      * expire time
