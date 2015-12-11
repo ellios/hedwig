@@ -119,10 +119,16 @@ abstract public class AbstractRedisClient {
                 //Redis Connection is broken
                 broken = true;
                 if(tryCount < 3){
-                    LOG.warn("fail to execute callback in redis host : {} port : {}, error : {}, try again tryCount : {}",
-                            jedisLocal.get().getKey().getClient().getHost(),
-                            jedisLocal.get().getKey().getClient().getPort(),
-                            e.getMessage(), tryCount);
+                    if(jedisLocal.get() != null){
+                        LOG.warn("fail to execute callback in redis host : {} port : {}, error : {}, try again tryCount : {}",
+                                jedisLocal.get().getKey().getClient().getHost(),
+                                jedisLocal.get().getKey().getClient().getPort(),
+                                e.getMessage(), tryCount);
+                    }else{
+                        LOG.warn("fail to execute callback in redis for redis not found. error : {}, try again tryCount : {}",
+                                e.getMessage(), tryCount);
+                    }
+
                     try {
                         Thread.sleep(50);
                     } catch (InterruptedException e1) {

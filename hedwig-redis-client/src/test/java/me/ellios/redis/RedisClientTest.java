@@ -21,6 +21,16 @@ public class RedisClientTest {
     RedisClient client = RedisClientFactory.getRedisClient("test");
 
     @Test
+    public void testAuth() throws Exception {
+        client.set("ellios1", "hello".getBytes());
+        String result = client.get("ellios1");
+
+        System.out.println("====================================");
+        System.out.println(result);
+        System.out.println("====================================");
+    }
+
+    @Test
     public void testGet() throws Exception {
         client.set("ellios1", "hello".getBytes());
         String result = client.get("ellios1");

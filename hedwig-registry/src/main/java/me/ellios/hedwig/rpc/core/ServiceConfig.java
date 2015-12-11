@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 public class ServiceConfig {
 
     public static final int DEFAULT_SERVICE_PORT = 8888;
-    public static final int DEFAULT_MAX_FRAME_SIZE = 2 * 1024 * 1024; //2M
+    public static final int DEFAULT_MAX_FRAME_SIZE = 3 * 1024 * 1024; //3M
     public static final String DEFAULT_SERVICE_GROUP = "";
     private int maxFrameSize = DEFAULT_MAX_FRAME_SIZE;
     private String name;
