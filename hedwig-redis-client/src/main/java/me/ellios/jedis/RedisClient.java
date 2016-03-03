@@ -462,6 +462,25 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
     }
 
     @Override
+    public Long incrBy(final String key, final long step) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Long>() {
+                @Override
+                public Long doWithJedisCluster(JedisCluster cluster) {
+                    return cluster.incrBy(key,step);
+                }
+            });
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
+                @Override
+                public Long doWithJedis(Jedis jedis) {
+                    return jedis.incrBy(key, step);
+                }
+            });
+        }
+    }
+
+    @Override
     public Boolean zadd(final String key, final double score, final String member) {
         if (getServerMode() == ServerMode.CLUSTER) {
             return executeWithJedisCluster(new JedisClusterCallback<Boolean>() {

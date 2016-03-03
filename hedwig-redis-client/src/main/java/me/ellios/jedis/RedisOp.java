@@ -35,7 +35,7 @@ public interface RedisOp {
     /**
      * hget
      *
-     * @param key
+     * @param keyin               i
      * @param field
      * @return
      */
@@ -188,6 +188,13 @@ public interface RedisOp {
      * @return
      */
     Long incr(String key);
+
+    /**
+     * @param key
+     * @param step
+     * @return
+     */
+    Long incrBy(String key, long step);
 
     Boolean zadd(String key, double score, String member);
 
