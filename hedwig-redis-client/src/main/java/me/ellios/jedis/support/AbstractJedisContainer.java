@@ -1,6 +1,7 @@
 package me.ellios.jedis.support;
 
 import me.ellios.jedis.config.Config;
+import me.ellios.jedis.util.RedisConfigFileParsers;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 /**
@@ -22,19 +23,19 @@ abstract public class AbstractJedisContainer implements JedisContainer{
      */
     protected GenericObjectPoolConfig getPoolConfig() {
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
-//        poolConfig.lifo = RedisConfigFileParsers.getPoolLifo();
-//        poolConfig.maxActive = RedisConfigFileParsers.getPoolMaxActive();
-//        poolConfig.maxIdle = me.ellios.jedis.util.RedisConfigFileParsers.getPoolMaxIdle();
-//        poolConfig.minIdle = me.ellios.jedis.util.RedisConfigFileParsers.getPoolMinIdle();
-//        poolConfig.maxWait = me.ellios.jedis.util.RedisConfigFileParsers.getPoolMaxWait();
-//        poolConfig.testOnBorrow = me.ellios.jedis.util.RedisConfigFileParsers.getPoolTestOnBorrow();
-//        poolConfig.testOnReturn = me.ellios.jedis.util.RedisConfigFileParsers.getPoolTestOnReturn();
-//        poolConfig.whenExhaustedAction = (byte) me.ellios.jedis.util.RedisConfigFileParsers.getPoolWhenExhaustedAction();
-//        poolConfig.testWhileIdle = me.ellios.jedis.util.RedisConfigFileParsers.getPoolTestWhileIdle();
-//        poolConfig.minEvictableIdleTimeMillis = me.ellios.jedis.util.RedisConfigFileParsers.getPoolMinEvictableIdleTimeMillis();
-//        poolConfig.timeBetweenEvictionRunsMillis = me.ellios.jedis.util.RedisConfigFileParsers.getPoolTimeBetweenEvictionRunsMillis();
-//        poolConfig.numTestsPerEvictionRun = me.ellios.jedis.util.RedisConfigFileParsers.getPoolNumTestsPerEvictionRun();
-//        poolConfig.softMinEvictableIdleTimeMillis = RedisConfigFileParsers.getPoolSoftMinEvictableIdleTimeMillis();
+        poolConfig.setLifo(RedisConfigFileParsers.getPoolLifo());
+        poolConfig.setMaxTotal(RedisConfigFileParsers.getPoolMaxActive());
+        poolConfig.setMaxIdle(RedisConfigFileParsers.getPoolMaxIdle());
+        poolConfig.setMinIdle(RedisConfigFileParsers.getPoolMinIdle());
+        poolConfig.setMaxWaitMillis(RedisConfigFileParsers.getPoolMaxWait());
+        poolConfig.setTestOnBorrow(RedisConfigFileParsers.getPoolTestOnBorrow());
+        poolConfig.setTestOnReturn(RedisConfigFileParsers.getPoolTestOnReturn());
+        poolConfig.setBlockWhenExhausted(RedisConfigFileParsers.getBlockWhenExhausted());
+        poolConfig.setTestWhileIdle(RedisConfigFileParsers.getPoolTestWhileIdle());
+        poolConfig.setMinEvictableIdleTimeMillis(RedisConfigFileParsers.getPoolMinEvictableIdleTimeMillis());
+        poolConfig.setTimeBetweenEvictionRunsMillis(RedisConfigFileParsers.getPoolTimeBetweenEvictionRunsMillis());
+        poolConfig.setNumTestsPerEvictionRun(RedisConfigFileParsers.getPoolNumTestsPerEvictionRun());
+        poolConfig.setSoftMinEvictableIdleTimeMillis(RedisConfigFileParsers.getPoolSoftMinEvictableIdleTimeMillis());
         return poolConfig;
     }
 }

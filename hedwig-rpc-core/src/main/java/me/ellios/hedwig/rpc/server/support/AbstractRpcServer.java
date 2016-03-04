@@ -15,10 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Author: ellios
@@ -29,6 +26,7 @@ abstract public class AbstractRpcServer implements RpcServer {
     protected static HedwigConfig hc = HedwigConfig.getInstance();
 
     protected static final int BACKLOG = hc.getInt("hedwig.server.backlog", 1024000);
+    protected static final int MAX_THREAD_POOL_SIZE = hc.getInt("hedwig.max.thread.pool.size", 5000);
     protected static final boolean TCP_NODELAY = hc.getBoolean("hedwig.server.tcp.nodeley", true);
     protected static final boolean REUSE_ADDRESS = hc.getBoolean("hedwig.server.reuse.address", true);
     protected static final boolean KEEPALIVE = hc.getBoolean("hedwig.server.keep.alive", true);
@@ -133,10 +131,13 @@ abstract public class AbstractRpcServer implements RpcServer {
      * @return thread pool
      */
     public static ExecutorService newCachedThreadPool(String threadNameFormat) {
-        ThreadFactory bossThreadFactory = new ThreadFactoryBuilder()
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
                 .setNameFormat(threadNameFormat)
                 .build();
-        return Executors.newCachedThreadPool(bossThreadFactory);
+        return new ThreadPoolExecutor(0, MAX_THREAD_POOL_SIZE,
+                60L, TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>(),
+                threadFactory);
     }
 
     public static ExecutorService newCachedThreadPool(String threadNameFormat, Object... args) {

@@ -125,8 +125,10 @@ abstract public class AbstractRedisClient {
                                 jedisLocal.get().getKey().getClient().getPort(),
                                 e.getMessage(), tryCount);
                     }else{
-                        LOG.warn("fail to execute callback in redis for redis not found. error : {}, try again tryCount : {}",
-                                e.getMessage(), tryCount);
+                        Pool<Jedis> pool = jedisContainer.getJedisPool(type);
+
+                        LOG.warn("fail to execute callback in redis for redis not found. error : {}, try again tryCount : {}. active num : {}, wait num : {}",
+                                e.getMessage(), pool.getNumActive(), pool.getNumWaiters(), tryCount);
                     }
 
                     try {
