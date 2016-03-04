@@ -26,7 +26,7 @@ public class ConfigFactoryBuilder {
      */
     public static ConfigFactory getConfigFactory(String name) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(name));
-        String servers = me.ellios.jedis.util.RedisConfigFileParsers.getRedisServers(name);
+        String servers = RedisConfigFileParsers.getRedisServers(name);
         if (StringUtils.isNotEmpty(servers)) {
             //优先从配置文件里面读redis服务信息
             LOG.info("read redis config : {} from : {}", name, RedisConfigFileParsers.getConfigFileAbsolutePath());

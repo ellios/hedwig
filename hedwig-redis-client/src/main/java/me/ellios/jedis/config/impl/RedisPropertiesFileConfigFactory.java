@@ -1,5 +1,6 @@
 package me.ellios.jedis.config.impl;
 
+import me.ellios.hedwig.common.utils.ClassLoaderUtils;
 import me.ellios.jedis.config.ConfigListener;
 import me.ellios.jedis.config.support.BaseConfigFactory;
 import me.ellios.jedis.util.RedisConfigFileParsers;

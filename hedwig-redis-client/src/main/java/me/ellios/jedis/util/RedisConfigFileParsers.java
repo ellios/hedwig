@@ -83,7 +83,7 @@ public class RedisConfigFileParsers {
      */
     public static String getConfigFileAbsolutePath() {
 
-        String classPathFilename = "properties/hedwig.properties";
+        String classPathFilename = "hedwig.properties";
         URL url = ClassLoaderUtils.getURL(classPathFilename);
         if (url == null) {
             return null;
