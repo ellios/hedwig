@@ -78,7 +78,9 @@ abstract public class AbstractRedisClient {
         }
 
         //destroy old jedis container
-        this.jedisContainer.destroy();
+        if(this.jedisContainer != null){
+            this.jedisContainer.destroy();
+        }
 
         this.jedisContainer = container;
     }
