@@ -42,7 +42,8 @@ public class ZookeeperClientFactory {
     private static ZookeeperClient buildClient(String type, String namespace) {
         String connectString = createFullConnectionString(type);
 
-        if (!(ZooType.SERVICE.getType().equalsIgnoreCase(type) || ZooType.REDIS.getType().equalsIgnoreCase(type))) {
+        if (!(ZooType.SERVICE.getType().equalsIgnoreCase(type) || ZooType.REDIS.getType().equalsIgnoreCase(type)
+                || ZooType.MEMCACHED.getType().equalsIgnoreCase(type))) {
             // clear out namespace if it's not of service/redis type.
             namespace = "";
         }

@@ -77,6 +77,9 @@ abstract public class AbstractRedisClient {
             return;
         }
 
+        //destroy old jedis container
+        this.jedisContainer.destroy();
+
         this.jedisContainer = container;
     }
 
@@ -129,6 +132,7 @@ abstract public class AbstractRedisClient {
 
                         LOG.warn("fail to execute callback in redis for redis not found. error : {}, try again tryCount : {}. active num : {}, wait num : {}, idel num : {}",
                                 e.getMessage(), pool.getNumActive(), pool.getNumWaiters(), pool.getNumIdle(), tryCount, e);
+                        LOG.warn("fail to create connect to redis servers. conn config ; {}", config);
                     }
 
                     try {

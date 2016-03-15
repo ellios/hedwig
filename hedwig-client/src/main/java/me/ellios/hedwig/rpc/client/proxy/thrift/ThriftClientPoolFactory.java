@@ -19,8 +19,8 @@ public class ThriftClientPoolFactory {
         HedwigPoolConfig config = new HedwigPoolConfig();
         config.lifo = hc.getBoolean("hedwig.rpc.pool.lifo", true);
         config.setMaxActive(hc.getInt("hedwig.rpc.pool.maxActive", 200));
-        config.setMaxIdle(hc.getInt("hedwig.rpc.pool.maxIdle", 50));
-        config.setMinIdle(hc.getInt("hedwig.rpc.pool.minIdle", 20));
+        config.setMaxIdle(hc.getInt("hedwig.rpc.pool.maxIdle", 10));
+        config.setMinIdle(hc.getInt("hedwig.rpc.pool.minIdle", 5));
         config.setMaxWait(hc.getInt("hedwig.rpc.pool.maxWait", 1000));
         config.setTestOnBorrow(hc.getBoolean("hedwig.rpc.pool.testOnBorrow", true));
         config.setTestOnReturn(hc.getBoolean("hedwig.rpc.pool.testOnReturn", false));
