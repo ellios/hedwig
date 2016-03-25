@@ -424,6 +424,33 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
     }
 
     @Override
+    public Boolean ltrim(final String key, final int start, final int end) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            return executeWithJedisCluster(new JedisClusterCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedisCluster(JedisCluster cluster) {
+                    String replyCode = cluster.ltrim(key, start, end);
+                    if (!RedisReply.OK.equalsIgnoreCase(replyCode)) {
+                        return false;
+                    }
+                    return true;
+                }
+            });
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedis(Jedis jedis) {
+                    String replyCode = jedis.ltrim(key, start, end);
+                    if (!RedisReply.OK.equalsIgnoreCase(replyCode)) {
+                        return false;
+                    }
+                    return true;
+                }
+            });
+        }
+    }
+
+    @Override
     public Boolean exists(final String key) {
         if (getServerMode() == ServerMode.CLUSTER) {
             return executeWithJedisCluster(new JedisClusterCallback<Boolean>() {
