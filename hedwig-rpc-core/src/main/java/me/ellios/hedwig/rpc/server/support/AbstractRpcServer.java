@@ -25,8 +25,8 @@ abstract public class AbstractRpcServer implements RpcServer {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractRpcServer.class);
     protected static HedwigConfig hc = HedwigConfig.getInstance();
 
-    protected static final int BACKLOG = hc.getInt("hedwig.server.backlog", 1024000);
-    protected static final int MAX_THREAD_POOL_SIZE = hc.getInt("hedwig.max.thread.pool.size", 5000);
+    protected static final int BACKLOG = hc.getInt("hedwig.server.backlog", 1024);
+    protected static final int MAX_THREAD_POOL_SIZE = hc.getInt("hedwig.max.thread.pool.size", 500);
     protected static final boolean TCP_NODELAY = hc.getBoolean("hedwig.server.tcp.nodeley", true);
     protected static final boolean REUSE_ADDRESS = hc.getBoolean("hedwig.server.reuse.address", true);
     protected static final boolean KEEPALIVE = hc.getBoolean("hedwig.server.keep.alive", true);
