@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class HedwigMemcachedClientTest {
 
-    private MemcachedOp memcachedOp = HedwigMemcachedClientFactory.getMemcachedClient("test");
+    private MemcachedOp memcachedOp = HedwigMemcachedClientFactory.getMemcachedClient("web_old_sis");
 
     @Test
     public void test(){
@@ -28,6 +28,16 @@ public class HedwigMemcachedClientTest {
         System.out.println(bb);
         System.out.println(memcachedOp.get("gogo"));
         System.out.println("=========================================");
+    }
+
+    @Test
+    public void testAdd(){
+        boolean result = memcachedOp.add("zzzz", 10, "hello");
+        boolean result1 = memcachedOp.add("zzzz", 1, "hello");
+        System.out.println("========================================");
+        System.out.println(result);
+        System.out.println(result1);
+        System.out.println("========================================");
     }
 
     public static class User implements Serializable{

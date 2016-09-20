@@ -1,5 +1,6 @@
 package me.ellios.jedis;
 
+import redis.clients.jedis.JedisPubSub;
 import redis.clients.jedis.Tuple;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Set;
  * Author: ellios
  * Date: 13-1-29 Time: 下午9:09
  */
-public interface RedisOp {
+public interface RedisOp{
 
     Object getObject(String key);
 
@@ -245,4 +246,29 @@ public interface RedisOp {
     Long zrem(String key, String... members);
 
     List<String> lrange(String key, long start, long end);
+
+    /**
+     * 发布命令到channel
+     * @param channel
+     * @param message
+     * @return
+     */
+    Long publish(String channel, String message);
+
+    /**
+     * 订阅channel
+     * @param jedisPubSub
+     * @param channels
+     * @return
+     */
+    Boolean subscribe(JedisPubSub jedisPubSub, String... channels);
+
+    /**
+     * 按pattern订阅
+     * @param jedisPubSub
+     * @param patterns
+     * @return
+     */
+    Boolean psubscribe(JedisPubSub jedisPubSub, String... patterns);
+
 }

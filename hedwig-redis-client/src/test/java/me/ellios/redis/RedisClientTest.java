@@ -4,6 +4,7 @@ import me.ellios.jedis.RedisClient;
 import me.ellios.jedis.RedisClientFactory;
 import org.junit.Assert;
 import org.junit.Test;
+import redis.clients.jedis.JedisPubSub;
 import redis.clients.jedis.Tuple;
 
 import java.io.Serializable;
@@ -21,8 +22,36 @@ public class RedisClientTest {
     RedisClient client = RedisClientFactory.getRedisClient("test");
 
     @Test
+    public void testPublish() throws Exception {
+        Long result = client.publish("ellios_publish", "hello");
+
+        System.out.println("====================================");
+        System.out.println(result);
+        System.out.println("====================================");
+    }
+
+    @Test
+    public void testSubscribe() throws Exception {
+        boolean result = client.subscribe(new JedisPubSub() {
+            @Override
+            public void onMessage(String channel, String message) {
+                super.onMessage(channel, message);
+                System.out.println("------------------------------------");
+                System.out.println(channel);
+                System.out.println(message);
+                System.out.println("------------------------------------");
+            }
+        }, "ellios_publish");
+
+        System.out.println("====================================");
+        System.out.println(result);
+        System.out.println("====================================");
+        Thread.sleep(1000000L);
+    }
+
+    @Test
     public void testAuth() throws Exception {
-        client.set("ellios1", "hello".getBytes());
+        client.set("ellios1", "hello".getBytes(), 10);
         String result = client.get("ellios1");
 
         System.out.println("====================================");

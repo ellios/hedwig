@@ -2,16 +2,14 @@ package me.ellios.jedis;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import me.ellios.jedis.config.Config;
 import me.ellios.jedis.config.ServerMode;
 import me.ellios.jedis.support.AbstractRedisClient;
 import me.ellios.jedis.transcoders.CachedData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
-import redis.clients.jedis.Protocol;
-import redis.clients.jedis.Tuple;
+import redis.clients.jedis.*;
 import redis.clients.util.SafeEncoder;
 
 import java.util.*;
@@ -712,6 +710,50 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 @Override
                 public List<String> doWithJedis(Jedis jedis) {
                     return jedis.lrange(key, start, end);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Long publish(final String channel, final String message) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            throw new UnsupportedOperationException();
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Long>() {
+                @Override
+                public Long doWithJedis(Jedis jedis) {
+                    return jedis.publish(channel, message);
+                }
+            });
+        }
+    }
+
+    @Override
+    public Boolean subscribe(final JedisPubSub jedisPubSub, final String... channels) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            throw new UnsupportedOperationException();
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedis(Jedis jedis) {
+                    jedis.subscribe(jedisPubSub, channels);
+                    return true;
+                }
+            });
+        }
+    }
+
+    @Override
+    public Boolean psubscribe(final JedisPubSub jedisPubSub, final String... patterns) {
+        if (getServerMode() == ServerMode.CLUSTER) {
+            throw new UnsupportedOperationException();
+        } else {
+            return executeWithJedis(WRITE, new JedisCallback<Boolean>() {
+                @Override
+                public Boolean doWithJedis(Jedis jedis) {
+                    jedis.psubscribe(jedisPubSub, patterns);
+                    return true;
                 }
             });
         }
