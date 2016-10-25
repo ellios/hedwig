@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ProcessingException;
+import javax.ws.rs.core.Application;
 
 /**
  * Say something?
@@ -16,13 +17,12 @@ import javax.ws.rs.ProcessingException;
 public class NettyHttpContainerProvider implements ContainerProvider {
     private static final Logger LOG = LoggerFactory.getLogger(NettyHttpContainerProvider.class);
 
-
     @Override
-    public <T> T createContainer(Class<T> type, ApplicationHandler appHandler) throws ProcessingException {
+    public <T> T createContainer(Class<T> type, Application app) throws ProcessingException {
         if (type != NettyHttpContainer.class) {
             LOG.warn("Unsupported type {}", type);
             return null;
         }
-        return type.cast(new NettyHttpContainer(appHandler));
+        return type.cast(new NettyHttpContainer(new ApplicationHandler(app)));
     }
 }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ProcessingException;
+import javax.ws.rs.core.Application;
 
 /**
  * Say something?
@@ -18,11 +19,11 @@ public class NettyMemcachedContainerProvider implements ContainerProvider {
 
 
     @Override
-    public <T> T createContainer(Class<T> type, ApplicationHandler appHandler) throws ProcessingException {
+    public <T> T createContainer(Class<T> type, Application app) throws ProcessingException {
         if (type != NettyMemcachedContainer.class) {
             LOG.warn("Unsupported type {}", type);
             return null;
         }
-        return type.cast(new NettyMemcachedContainer(appHandler));
+        return type.cast(new NettyMemcachedContainer(new ApplicationHandler(app)));
     }
 }
