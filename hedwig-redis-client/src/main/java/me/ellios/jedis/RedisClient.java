@@ -35,7 +35,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
             return executeWithJedisCluster(new JedisClusterCallback<byte[]>() {
                 @Override
                 public byte[] doWithJedisCluster(JedisCluster cluster) {
-                    return cluster.getBytes(key);
+                    return cluster.get(SafeEncoder.encode(key));
                 }
             });
         } else {
@@ -54,7 +54,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
             return executeWithJedisCluster(new JedisClusterCallback<Object>() {
                 @Override
                 public Object doWithJedisCluster(JedisCluster cluster) {
-                    return transcoder.decode(new CachedData(cluster.getBytes(key)));
+                    return transcoder.decode(new CachedData(cluster.get(SafeEncoder.encode(key))));
                 }
             });
         } else {
@@ -136,7 +136,7 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
             return executeWithJedisCluster(new JedisClusterCallback<Boolean>() {
                 @Override
                 public Boolean doWithJedisCluster(JedisCluster cluster) {
-                    String status = cluster.setBytes(key, data);
+                    String status = cluster.set(SafeEncoder.encode(key), data);
 
                     return RedisReply.OK.equalsIgnoreCase(status);
                 }
@@ -223,9 +223,9 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 public Boolean doWithJedisCluster(JedisCluster cluster) {
                     String status = "";
                     if (exp > 0) {
-                        status = cluster.setexBytes(key, exp, data);
+                        status = cluster.setex(SafeEncoder.encode(key), exp, data);
                     } else {
-                        status = cluster.setBytes(key, data);
+                        status = cluster.set(SafeEncoder.encode(key), data);
                     }
                     return Protocol.Keyword.OK.name().equalsIgnoreCase(status);
                 }
@@ -254,9 +254,9 @@ public class RedisClient extends AbstractRedisClient implements RedisOp {
                 public Boolean doWithJedisCluster(JedisCluster cluster) {
                     String status = "";
                     if (exp > 0) {
-                        status = cluster.setexBytes(key, exp, transcoder.encode(data).getFullData());
+                        status = cluster.setex(SafeEncoder.encode(key), exp, transcoder.encode(data).getFullData());
                     } else {
-                        status = cluster.setBytes(key, transcoder.encode(data).getFullData());
+                        status = cluster.set(SafeEncoder.encode(key), transcoder.encode(data).getFullData());
                     }
                     return Protocol.Keyword.OK.name().equalsIgnoreCase(status);
                 }

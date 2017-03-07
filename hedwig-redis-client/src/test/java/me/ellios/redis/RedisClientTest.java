@@ -51,22 +51,26 @@ public class RedisClientTest {
 
     @Test
     public void testAuth() throws Exception {
-        client.set("ellios1", "hello".getBytes(), 10);
+        String hello = "hello";
+        client.set("ellios1", hello.getBytes(), 10);
         String result = client.get("ellios1");
 
         System.out.println("====================================");
         System.out.println(result);
         System.out.println("====================================");
+        Assert.assertEquals(hello, result);
     }
 
     @Test
     public void testGet() throws Exception {
-        client.set("ellios1", "hello".getBytes());
+        String hello = "hello";
+        client.set("ellios1", hello.getBytes(), 10);
         String result = client.get("ellios1");
 
         System.out.println("====================================");
         System.out.println(result);
         System.out.println("====================================");
+        Assert.assertEquals(hello, result);
     }
 
     @Test
@@ -165,6 +169,7 @@ public class RedisClientTest {
         System.out.println("======================================");
         System.out.println(user);
         System.out.println("======================================");
+        Assert.assertNotNull(user);
     }
 
     public static class User implements Serializable {

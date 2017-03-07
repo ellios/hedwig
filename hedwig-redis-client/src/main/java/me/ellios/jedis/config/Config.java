@@ -92,11 +92,13 @@ public class Config {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Config{");
-        sb.append("sentinelName='").append(sentinelName).append('\'');
-        sb.append(", schema=").append(schema);
+        sb.append("schema=").append(schema);
         sb.append(", name='").append(name).append('\'');
         sb.append(", serverMode=").append(serverMode);
         sb.append(", nodes=").append(nodes);
+        sb.append(", sentinelName='").append(sentinelName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", db=").append(db);
         sb.append('}');
         return sb.toString();
     }

@@ -73,7 +73,7 @@
 
         <zookeeper.version>3.4.6</zookeeper.version>
         <curator.version>2.4.0</curator.version>
-        <jedis.version>ha-2.7.2-SNAPSHOT</jedis.version>
+        <jedis.version>2.9.0-SNAPSHOT</jedis.version>
 
     </properties>
 

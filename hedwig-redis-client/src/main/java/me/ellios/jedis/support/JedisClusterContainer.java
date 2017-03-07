@@ -4,11 +4,14 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import me.ellios.jedis.OpType;
 import me.ellios.jedis.config.Config;
+import me.ellios.jedis.util.RedisConfigFileParsers;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.util.Pool;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
 
@@ -29,7 +32,9 @@ public class JedisClusterContainer extends AbstractJedisContainer {
             clusterNodes.add(new HostAndPort(node.getHost(), node.getPort()));
         }
 
-        jedisCluster = new JedisCluster(clusterNodes, getPoolConfig());
+
+        int timeout = RedisConfigFileParsers.getTimeout();
+        jedisCluster = new JedisCluster(clusterNodes, timeout, timeout, 3, config.getPassword(), getPoolConfig());
     }
 
     @Override
@@ -44,6 +49,9 @@ public class JedisClusterContainer extends AbstractJedisContainer {
 
     @Override
     public void destroy() {
-        jedisCluster.close();
+        try {
+            jedisCluster.close();
+        } catch (IOException e) {
+        }
     }
 }
