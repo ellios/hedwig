@@ -10,6 +10,8 @@ import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder;
 import org.jboss.netty.handler.codec.frame.LengthFieldPrepender;
 import org.jboss.netty.handler.timeout.IdleStateHandler;
 import org.jboss.netty.util.HashedWheelTimer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A thrift server channel pipeline factory.
@@ -18,6 +20,7 @@ import org.jboss.netty.util.HashedWheelTimer;
  * @since 13-10-11 下午3:46
  */
 public class ThriftServerPipelineFactory implements ChannelPipelineFactory {
+    private static final Logger LOG = LoggerFactory.getLogger(ThriftServerPipelineFactory.class);
     private static final HashedWheelTimer timer = new HashedWheelTimer();
     private static final HedwigConfig hc = HedwigConfig.getInstance();
 
@@ -31,6 +34,7 @@ public class ThriftServerPipelineFactory implements ChannelPipelineFactory {
 
     @Override
     public ChannelPipeline getPipeline() throws Exception {
+        LOG.info("get Pipeline channels : {}", allChannels);
         ChannelPipeline cp = Channels.pipeline();
         // Get runtime connection numbers.
         cp.addLast("connectionLimiter", new ConnectionLimitFilterHandler(thriftServiceDef));

@@ -16,7 +16,7 @@ public class ThriftBenchmarkClient extends AbstractBenchmarkClient {
     private Benchmark.Iface service = ServiceHelper.getThriftService(Benchmark.Iface.class);
 
     public static void main(String[] args) throws Exception {
-        new ThriftBenchmarkClient().run(new String[]{"100", "120", "5"});
+        new ThriftBenchmarkClient().run(new String[]{"10", "65", "100"});
     }
 
     @Override

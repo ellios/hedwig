@@ -32,10 +32,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Sharable
 public class ConnectionLimitFilterHandler extends IpFilteringHandlerImpl {
     private static final Logger LOG = LoggerFactory.getLogger(ConnectionLimitFilterHandler.class);
-    private final ConcurrentMap<InetAddress, AtomicInteger> hostConnectionCount =
+    private static final ConcurrentMap<String, AtomicInteger> hostConnectionCount =
             new ConcurrentHashMap<>();
 
-    private final AtomicInteger totalConnections = new AtomicInteger(0);
+    private static final AtomicInteger totalConnections = new AtomicInteger(0);
 
     private final ThriftServiceDef def;
     private final boolean enable;
@@ -48,6 +48,8 @@ public class ConnectionLimitFilterHandler extends IpFilteringHandlerImpl {
     public ConnectionLimitFilterHandler(ThriftServiceDef def) {
         this.def = def;
         this.enable = def.isEnableConnectionCheck();
+        LOG.info("init ConnectionLimitFilterHandler, hostConnectionCount : {}, totalConnections : {}",
+                hostConnectionCount, totalConnections);
     }
 
     private void decrement(InetAddress address) {
@@ -61,12 +63,12 @@ public class ConnectionLimitFilterHandler extends IpFilteringHandlerImpl {
     private void add(InetAddress address, int delta) {
         // Record the total connections.
         totalConnections.addAndGet(delta);
-        def.getTracer().addCount("connections-host-" + address.getHostAddress(), delta);
-        Metrics.newCounter(new MetricName(GROUP_KEY, HOST_KEY, address.getHostAddress())).inc(delta);
-        // Record total connections per client.
-        hostConnectionCount.get(address).addAndGet(delta);
         def.getTracer().addCount("connections-global-total", delta);
         Metrics.newCounter(METRIC_NAME).inc(delta);
+
+        def.getTracer().addCount("connections-host-" + address.getHostAddress(), delta);
+        int count = hostConnectionCount.get(address.getHostAddress()).addAndGet(delta);
+        Metrics.newCounter(new MetricName(GROUP_KEY, HOST_KEY, address.getHostAddress())).inc(delta);
     }
 
     @Override
@@ -74,13 +76,12 @@ public class ConnectionLimitFilterHandler extends IpFilteringHandlerImpl {
             throws Exception {
         // Check the per-client limits first.
         final InetAddress address = socketAddress.getAddress();
-        if (!hostConnectionCount.containsKey(address)) {
-            hostConnectionCount.put(address, new AtomicInteger(0));
-        }
-        int hostCount = hostConnectionCount.get(address).get();
+        hostConnectionCount.putIfAbsent(address.getHostAddress(), new AtomicInteger(0));
+        
+        int hostCount = hostConnectionCount.get(address.getHostAddress()).get();
         if (enable && def.getHostConnectionsThresholds() <= hostCount) {
             LOG.warn("Host {} already created {} connections(max allowed {}). We will refuse this one from {}.",
-                    address, hostCount, def.getHostConnectionsThresholds(), socketAddress);
+                    address.getHostAddress(), hostCount, def.getHostConnectionsThresholds(), socketAddress);
             return false;
         }
         // Then check the global limits.

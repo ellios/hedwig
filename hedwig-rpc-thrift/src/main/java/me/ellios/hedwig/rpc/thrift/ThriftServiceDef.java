@@ -145,7 +145,7 @@ public class ThriftServiceDef {
                 .maxConcurrentRequests(Integer.MAX_VALUE)
                 .hostConnectionMaxIdleTime(config.connectionsThresholdsPerHost())
                 .hostConnectionMaxLifeTime(Integer.MAX_VALUE)
-                .hostConnectionsThresholds(Integer.MAX_VALUE)
+                .hostConnectionsThresholds(config.connectionsThresholdsPerHost())
                 .openConnectionsThresholds(config.globalConnectionsThresholds());
     }
 
